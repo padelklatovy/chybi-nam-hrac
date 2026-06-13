@@ -136,11 +136,19 @@ const App = (() => {
         <button class="link-action" id="copy-go">Zkopírovat text</button>
         <button class="link-action" id="img-go">Stáhnout obrázek</button>
       </div>
+      <details class="tip">
+        <summary>Jak poslat do víc skupin?</summary>
+        <p>Pošli pozvánku do jedné skupiny. Pak na zprávu podrž prst, dej
+        <strong>Přeposlat</strong> a označ další skupiny naráz. WhatsApp
+        neumí poslat do víc skupin jedním krokem, tohle je nejrychlejší cesta.
+        Text máš zkopírovaný, takže ho můžeš kamkoliv i vložit.</p>
+      </details>
     `);
 
-    document.getElementById('wa-go').onclick = () => {
-      toast('Otevírám WhatsApp…');
-      setTimeout(closeModal, 600);
+    document.getElementById('wa-go').onclick = async () => {
+      await Invite.copyText(m); // ať je text rovnou ve schránce pro vkládání/přeposílání
+      toast('Otevírám WhatsApp, text máš i ve schránce');
+      setTimeout(closeModal, 700);
     };
     document.getElementById('copy-go').onclick = async () => {
       const ok = await Invite.copyText(m);

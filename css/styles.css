@@ -280,3 +280,27 @@ body {
 .more-fields { display: none; }
 .more-fields.show { display: block; animation: fade .2s ease; }
 @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+
+/* ----- nápověda „jak do víc skupin" ----- */
+.tip {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.tip summary {
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: .88rem;
+  font-weight: 600;
+  list-style: none;
+}
+.tip summary::-webkit-details-marker { display: none; }
+.tip summary::before { content: '＋ '; color: var(--red); font-weight: 700; }
+.tip[open] summary::before { content: '− '; }
+.tip p {
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: .86rem;
+  line-height: 1.6;
+}
+.tip strong { color: var(--text); }
