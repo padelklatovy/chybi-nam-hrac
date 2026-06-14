@@ -15,8 +15,8 @@
 
 const DataService = (() => {
 
-  const SUPABASE_URL = 'https://TVUJ-PROJEKT.supabase.co';
-  const SUPABASE_ANON_KEY = 'TVUJ_ANON_KEY';
+  const SUPABASE_URL = 'https://yynkcxanfglptmznkiwx.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_DY2iR5z1GmK_-jb7XVa0hw_Z_6uNYzo';
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   function must(r) { if (r.error) throw new Error(r.error.message); return r.data; }
