@@ -20,7 +20,7 @@ const Invite = (() => {
     const lines = [];
     lines.push('🎾 *CHYBÍ NÁM HRÁČ — Padel Klatovy*');
     lines.push('');
-    lines.push(`📅 ${fmtDateLong(m.date)} v ${m.time}`);
+    lines.push(`📅 ${fmtDateLong(m.date)} v ${m.time}${m.time_end ? '–' + m.time_end : ''}`);
     if (m.court) lines.push(`📍 ${m.court}`);
     lines.push(`🏷️ Úroveň: ${m.level}   •   ${m.type}`);
     if (m.status === 'full' || m.needed === 0) {
@@ -118,7 +118,7 @@ const Invite = (() => {
     y += 110;
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '700 64px Montserrat, Arial, sans-serif';
-    ctx.fillText(fmtDateLong(m.date) + '  ·  ' + m.time, cx, y);
+    ctx.fillText(fmtDateLong(m.date) + '  ·  ' + m.time + (m.time_end ? '–' + m.time_end : ''), cx, y);
 
     y += 90;
     ctx.fillStyle = '#A9C4BC';

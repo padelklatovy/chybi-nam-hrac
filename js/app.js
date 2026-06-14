@@ -59,7 +59,7 @@ const App = (() => {
       return `
         <div class="card match ${full ? 'is-full' : ''}">
           <div class="match-top">
-            <span class="match-when">${fmtDate(m.date)} v ${esc(m.time)}</span>
+            <span class="match-when">${fmtDate(m.date)} v ${esc(m.time)}${m.time_end ? '–' + esc(m.time_end) : ''}</span>
             <span class="badge level">${esc(m.level)}</span>
           </div>
           <div class="match-meta">
@@ -171,9 +171,10 @@ const App = (() => {
       <button class="close-x" data-close>×</button>
       <h3>Nová hra</h3>
 
+      <div class="field"><label>Kdy</label><input id="f-date" type="date" value="${today}" /></div>
       <div class="field-row">
-        <div class="field"><label>Kdy</label><input id="f-date" type="date" value="${today}" /></div>
-        <div class="field"><label>V kolik</label><input id="f-time" type="time" value="18:00" /></div>
+        <div class="field"><label>Od</label><input id="f-time" type="time" value="18:00" /></div>
+        <div class="field"><label>Do</label><input id="f-time-end" type="time" value="19:30" /></div>
       </div>
       <div class="field-row">
         <div class="field"><label>Skupina</label><select id="f-level">${levelOpts}</select></div>
@@ -215,6 +216,7 @@ const App = (() => {
     document.getElementById('f-submit').onclick = async () => {
       const date = document.getElementById('f-date').value;
       const time = document.getElementById('f-time').value;
+      const time_end = document.getElementById('f-time-end').value;
       if (!date || !time) { toast('Doplň ještě datum a čas.'); return; }
 
       const name = document.getElementById('f-creator').value.trim();
@@ -222,7 +224,7 @@ const App = (() => {
 
       const m = await DataService.addMatch({
         creator: name,
-        date, time,
+        date, time, time_end,
         level: document.getElementById('f-level').value,
         type:  document.getElementById('f-type').value,
         court: document.getElementById('f-court').value,
