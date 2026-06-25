@@ -35,6 +35,16 @@
 
       <div id="matches-list"></div>
 
+      <details class="paysy-test">
+        <summary>🎾 Volné kurty (test napojení na Paysy)</summary>
+        <div class="field" style="margin-top:12px;">
+          <label>Den</label>
+          <input id="paysy-date" type="date" />
+        </div>
+        <button class="btn btn-ghost" id="paysy-load">Načíst volné kurty</button>
+        <div id="paysy-result" class="paysy-result"></div>
+      </details>
+
       <a class="bar-link" href="https://padelklatovy.github.io/padel-klatovy-bar/" target="_blank" rel="noopener">
         Klubový bar
       </a>
@@ -52,6 +62,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/dataService.supabase.js"></script>
+  <script src="js/paysyService.js"></script>
   <script src="js/invite.js"></script>
   <script src="js/app.js"></script>
 </body>
