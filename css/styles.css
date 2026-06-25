@@ -304,3 +304,34 @@ body {
   line-height: 1.6;
 }
 .tip strong { color: var(--text); }
+
+/* ----- TEST napojení na Paysy (dočasné) ----- */
+.paysy-test {
+  margin: 20px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.paysy-test summary {
+  cursor: pointer;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: .92rem;
+  list-style: none;
+}
+.paysy-test summary::-webkit-details-marker { display: none; }
+.paysy-result { margin-top: 12px; }
+.court-row {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.court-name { font-weight: 700; margin-bottom: 6px; }
+.slots { display: flex; flex-wrap: wrap; gap: 6px; }
+.slot {
+  font-size: .82rem;
+  background: var(--bg-card-2);
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  padding: 3px 8px;
+}
+.slot.busy { border-color: var(--line); color: var(--text-dim); }
