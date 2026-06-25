@@ -247,7 +247,40 @@ const App = (() => {
     document.getElementById('modal-overlay').onclick = (e) => {
       if (e.target.id === 'modal-overlay') closeModal();
     };
+
+    // --- TEST napojení na Paysy (čtení dostupnosti) ---
+    const paysyDate = document.getElementById('paysy-date');
+    if (paysyDate) {
+      // přednastav zítřek
+      const t = new Date(); t.setDate(t.getDate() + 1);
+      paysyDate.value = t.toISOString().slice(0, 10);
+      document.getElementById('paysy-load').onclick = loadPaysy;
+    }
+
     renderMatches();
+  }
+
+  async function loadPaysy() {
+    const date = document.getElementById('paysy-date').value;
+    const box = document.getElementById('paysy-result');
+    if (!date) { toast('Vyber den.'); return; }
+    box.innerHTML = '<div class="empty">Načítám z Paysy…</div>';
+    try {
+      const av = await PaysyService.getAvailability(date);
+      if (!av.courts.length) {
+        box.innerHTML = '<div class="empty">Pro tento den nejsou data.</div>';
+        return;
+      }
+      box.innerHTML = av.courts.map(c => {
+        const ranges = c.freeRanges.length
+          ? c.freeRanges.map(r => `<span class="slot">${r.from}–${r.to}</span>`).join('')
+          : '<span class="slot busy">obsazeno</span>';
+        return `<div class="court-row"><div class="court-name">${esc(c.name)}</div><div class="slots">${ranges}</div></div>`;
+      }).join('');
+      toast('Načteno z Paysy ✓');
+    } catch (e) {
+      box.innerHTML = `<div class="empty">Nepodařilo se načíst: ${esc(e.message)}</div>`;
+    }
   }
 
   return { init };
